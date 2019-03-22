@@ -1,0 +1,29 @@
+{
+    "name": "jacques/plutus-promocodes",
+    "description": "Promotional Codes for Plutus",
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "require": {
+        "php": "^7.1 || ^7.2 || ^7.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Plutus\\": "lib/",
+            "Plutus\\Controllers\\": "src/Controllers/",
+            "Plutus\\Integrations\\": "src/Intergrations/",
+            "Plutus\\Plugins\\": "src/Plugins/"
+        },
+        "psr-4": {
+            "Plutus\Plugin\PromoCode": "src/"
+        }
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Jacques Marneweck",
+            "email": "jacques@siberia.co.za"
+        }
+    ]
+}
