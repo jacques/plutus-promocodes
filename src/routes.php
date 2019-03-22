@@ -30,6 +30,13 @@ $app->get('/admin/promocodes', $authenticate($app), $is_admin($app), function ()
         $app->notFound();
     }
 
+    if (
+        !is_superadmin() &&
+        !is_financeadmin()
+    ) {
+        $app->notFound();
+    }
+
     if ($app->request()->get('agency_id')) {
         $agency_id = $app->request()->get('agency_id');
         $promocodes = Promocode::with('agency')
@@ -50,6 +57,13 @@ $app->get('/admin/promocodes', $authenticate($app), $is_admin($app), function ()
 
 $app->post('/admin/promocodes', $authenticate($app), $is_admin($app), function () use ($app, $config) {
     if (!array_key_exists('promocodes', $config['features'])) {
+        $app->notFound();
+    }
+
+    if (
+        !is_superadmin() &&
+        !is_financeadmin()
+    ) {
         $app->notFound();
     }
 
@@ -95,6 +109,13 @@ $app->get('/admin/promocodes/new', $authenticate($app), $is_admin($app), functio
         $app->notFound();
     }
 
+    if (
+        !is_superadmin() &&
+        !is_financeadmin()
+    ) {
+        $app->notFound();
+    }
+
     $agencies = Agency::orderBy('agency_name')
         ->get()
         ;
@@ -129,6 +150,13 @@ $app->get('/admin/promocodes/new', $authenticate($app), $is_admin($app), functio
 
 $app->map('/admin/promocodes/:promocode/edit', $authenticate($app), $is_admin($app), function () use ($app, $config) {
     if (!array_key_exists('promocodes', $config['features'])) {
+        $app->notFound();
+    }
+
+    if (
+        !is_superadmin() &&
+        !is_financeadmin()
+    ) {
         $app->notFound();
     }
 
