@@ -14,5 +14,5 @@ CREATE TABLE `promocodes` (
   KEY `agency_id` (`agency_id`),
   CONSTRAINT `promocodes_ibfk_1` FOREIGN KEY (`account_plan_id`) REFERENCES `account_plans` (`id`),
   CONSTRAINT `promocodes_ibfk_2` FOREIGN KEY (`agency_id`) REFERENCES `agencies` (`id`),
-  CONSTRIANT `promocodes_ibfk_3` FOREIGN KEY (`agent_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `promocodes_ibfk_3` FOREIGN KEY (`agent_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
