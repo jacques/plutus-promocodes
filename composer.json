@@ -10,13 +10,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Plutus\\": "lib/",
-            "Plutus\\Controllers\\": "src/Controllers/",
-            "Plutus\\Integrations\\": "src/Intergrations/",
-            "Plutus\\Plugins\\": "src/Plugins/"
-        },
-        "psr-4": {
-            "Plutus\Plugin\PromoCode": "src/"
+            "Plutus\\Plugins\\Promocodes\\": "src/"
         }
     },
     "license": "proprietary",
@@ -25,5 +19,9 @@
             "name": "Jacques Marneweck",
             "email": "jacques@siberia.co.za"
         }
-    ]
+    ],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.4",
+        "vimeo/psalm": "^3.2"
+    }
 }
