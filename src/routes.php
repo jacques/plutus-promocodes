@@ -148,7 +148,7 @@ $app->get('/admin/promocodes/new', $authenticate($app), $is_admin($app), functio
     $app->template->display('promocodes/new.tpl');
 });
 
-$app->map('/admin/promocodes/:promocode/edit', $authenticate($app), $is_admin($app), function () use ($app, $config) {
+$app->map('/admin/promocodes/:code/edit', $authenticate($app), $is_admin($app), function ($code) use ($app, $config) {
     if (!array_key_exists('promocodes', $config['features'])) {
         $app->notFound();
     }
@@ -160,6 +160,60 @@ $app->map('/admin/promocodes/:promocode/edit', $authenticate($app), $is_admin($a
         $app->notFound();
     }
 
+    $promocode = Promocode::findOrFail($code);
+
     if ($app->request()->isPost()) {
+        $post = $app->request()->post();
+
+        error_log(
+            sprintf(
+                '[UPDATE PROMOCODE] user_id: %d promocode_id: %d data=%s',
+                $_SESSION['user_id'],
+                $code,
+                json_encode($post)
+            )
+        );
+
+        foreach (['promocode', 'agency_id', 'agent_id', 'account_plan_id', 'udf1'] as $field) {
+            $promocode->{$field} = $post[$field];
+        }
+        $promocode->save();
+
+        $app->redirect('/admin/promocodes');
     }
+
+    $agencies = Agency::orderBy('agency_name')
+        ->get()
+        ;
+
+    /**
+     * Agencies which have agents are shown on the dropdown.
+     */
+    $agents = AgencyAgent::selectRaw("\n            u.id AS id,\n            CONCAT(u.first_name, ' ', u.last_name) AS name,\n            agencies__agents.agency_id\n        ")
+        ->leftJoin('users as u', 'u.id', '=', 'agencies__agents.user_id')
+        ->whereNotIn('agencies__agents.agency_id', [3])
+        ->groupBy('u.id')
+        ->groupBy('agencies__agents.agency_id')
+        ->orderBy('u.first_name', 'ASC')
+        ->orderBy('u.last_name', 'ASC')
+        ->get();
+
+    $account_plans = AccountPlan::where('account_type', 'wallet')
+        ->where('active', 1)
+        ->orderBy('monthly')
+        ->get()
+        ;
+
+    $app->template->bulkAssign(
+        compact(
+            'code',
+            'account_plans',
+            'agencies',
+            'agents'
+        )
+    );
+
+    $app->template->bulkAssign($promocode->toArray());
+    $app->template->display('promocodes/promocodes__edit.tpl');
+    var_dump($app->template);
 })->via('GET', 'POST');
