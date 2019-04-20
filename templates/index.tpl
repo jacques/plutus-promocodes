@@ -31,7 +31,7 @@
             <td>{$row->account_plan->name|escape}</td>
             <td>{$row->udf1|escape}</td>
             <td>
-              <a href="/admin/promocodes/{$row->id}/edit"><i class="fa fa-pencil fa-fw"></i> Edit</a>
+              <a href="/admin/promocodes/{$row->id}/edit"><i class="fa fa-pencil fa-fw"></i> Edit</a> &bull;
               <a href="/admin/promocodes/{$row->id}/delete"><i class="fa fa-trash fa-fw"></i> Soft Delete</a>
             </td>
           </tr>
