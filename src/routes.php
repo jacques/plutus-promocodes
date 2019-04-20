@@ -99,8 +99,6 @@ $app->post('/admin/promocodes', $authenticate($app), $is_admin($app), function (
         $app->redirect('/admin/promocodes');
     }
 
-    var_dump($app->request()->post());
-
     $app->template->display('promocodes/new.tpl');
 });
 
@@ -215,5 +213,4 @@ $app->map('/admin/promocodes/:code/edit', $authenticate($app), $is_admin($app), 
 
     $app->template->bulkAssign($promocode->toArray());
     $app->template->display('promocodes/edit.tpl');
-    var_dump($app->template);
 })->via('GET', 'POST');
