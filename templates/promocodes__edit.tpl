@@ -7,7 +7,7 @@
       <div>
 {include file="_partials/errorsnonsession.tpl"}
 
-      <form action="/admin/promocodes/{$promocode.id}/edit" method="post" class="form-horizontal" role="form" accept-charset="UTF-8">
+      <form action="/admin/promocodes/{$code}/edit" method="post" class="form-horizontal" role="form" accept-charset="UTF-8">
 <input name="utf8" type="hidden" value="&#x2713;" />
 {include file="_partials/csrf.tpl"}
   <div class="form-group">
