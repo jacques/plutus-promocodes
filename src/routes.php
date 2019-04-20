@@ -214,6 +214,6 @@ $app->map('/admin/promocodes/:code/edit', $authenticate($app), $is_admin($app), 
     );
 
     $app->template->bulkAssign($promocode->toArray());
-    $app->template->display('promocodes/promocodes__edit.tpl');
+    $app->template->display('promocodes/edit.tpl');
     var_dump($app->template);
 })->via('GET', 'POST');
