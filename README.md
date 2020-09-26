@@ -12,7 +12,7 @@
 
 ## Copyright
 
-2019 Jacques Marneweck.  All rights strictly reserved.
+2019-2020 Jacques Marneweck.  All rights strictly reserved.
 
 ---
 
